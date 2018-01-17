@@ -16,7 +16,7 @@ pipeline {
     }
 
     stages {
-    	stage ('run docker') {
+    	stage ('intro') {
     		agent none
     		steps {
     			timeout (time: 5, unit: 'MINUTES') {
@@ -25,7 +25,6 @@ pipeline {
 	    			}
 
 	    			echo "${env.RESULT}"
-	    			sh 'env'
 	    		}
 	    	}
     	}
@@ -36,11 +35,12 @@ pipeline {
                 	args '-u root'
                 }
             }
-            when {
-            	beforeAgent true
-            	environment name: 'RESULT.RUN', value: 'true'
-            }
+            //when {
+            //	beforeAgent true
+           	//	environment name: 'RESULT.RUN', value: 'true'
+            //}
             steps {
+            	sh 'env'
                 sh 'mvn --version'
             }
         }
