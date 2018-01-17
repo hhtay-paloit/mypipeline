@@ -30,7 +30,9 @@ pipeline {
         }
         stage ('dev step') {
         	agent none
-        	input 'Continue?'
+        	steps {
+        		input 'Continue?'
+        	}
         }
     }
 }
