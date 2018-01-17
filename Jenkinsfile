@@ -21,7 +21,7 @@ pipeline {
             when {
             	beforeAgent true
             	expression  { 
-            		environment name: 'RESULT[Animal]', value: 'Cat' 
+            		environment name: 'RESULT.Animal', value: 'Cat' 
             	}
             }
             steps {
