@@ -1,7 +1,7 @@
 pipeline {
     agent none
     stages {
-        stage('Back-end') {
+        stage('maven step') {
             agent {
                 docker { 
                 	image 'maven:3-alpine' 
@@ -12,7 +12,7 @@ pipeline {
                 sh 'mvn --version'
             }
         }
-        stage('Front-end') {
+        stage('node step') {
             agent {
                 docker { image 'node:7-alpine' }
             }
@@ -20,13 +20,17 @@ pipeline {
                 sh 'node --version'
             }
         }
-        stage('Test node') {
+        stage('slave step') {
         	agent {
         		label 'ubuntu'
         	}
         	steps {
         		sh 'java -version '
         	}
+        }
+        stage ('dev step') {
+        	agent none
+        	input 'Continue?'
         }
     }
 }
