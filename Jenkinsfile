@@ -30,6 +30,9 @@ pipeline {
         }
         stage ('dev step') {
         	agent none
+        	when {
+        		branch 'dev'
+        	}
         	steps {
         		input 'Continue?'
         	}
