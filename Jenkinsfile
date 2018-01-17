@@ -5,7 +5,7 @@ pipeline {
     		agent none
     		steps {
     			script {
-    				env.RESULT = input message: 'Choose the following options', parameters: [choice(choices: 'Dog\nCat\nTurtle', description: '', name: 'Animal'), booleanParam(defaultValue: false, description: '', name: 'Run docker?')], submitter: 'hhtay,admin'
+    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle', description: '', name: 'Animal'), booleanParam(defaultValue: false, description: '', name: 'Docker')], submitter: 'hhtay,admin'
 
     			}
     			echo "${env.RESULT}"
@@ -17,6 +17,10 @@ pipeline {
                 	image 'maven:3-alpine' 
                 	args '-u root'
                 }
+            }
+            when {
+            	beforeAgent true
+            	expression  { env.RESULT['Animal'] == 'Cat' }
             }
             steps {
                 sh 'mvn --version'
