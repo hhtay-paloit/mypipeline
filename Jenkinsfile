@@ -55,13 +55,14 @@ pipeline {
                 	args '-u root'
                 }
             }
-            when {
-            	beforeAgent true
-            	expression {
-           			MAVEN == 'Maven'
-           		}
-            }
+           // when {
+            //	beforeAgent true
+            //	expression {
+           	//		MAVEN == 'Maven'
+           	//	}
+           // }
             steps {
+            	echo "${PERSON} ${MAVEN} ${DOCKER}" 
             	sh 'env'
                 sh 'mvn --version'
             }
