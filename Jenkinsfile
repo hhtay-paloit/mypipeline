@@ -17,12 +17,9 @@ pipeline {
 			choices: 'greeting\nsilence',
 			description: 'Say goodbye at the end',
 			name: 'END_ACTION')
-		choice(
-			// choices are a string of newline separated values
-			// https://issues.jenkins-ci.org/browse/JENKINS-41180
-			choices: 'greeting\nsilence',
-			description: 'Say hi at the beginning',
-			name: 'START_ACTION')
+
+		// say hi at the beginning
+		booleanParam (defaultValue: false, description: 'Say hi at the beginning?', name: 'START_ACTION')
     }
 
     stages {
@@ -120,6 +117,8 @@ pipeline {
         	}
         	steps {
         		echo 'GOOD BYE!'
+
+        		echo "${param.START_ACTION} ${param.END_ACTION}"
         	}
         }
     }
