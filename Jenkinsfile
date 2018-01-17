@@ -4,7 +4,10 @@ pipeline {
     	stage ('run docker') {
     		agent none
     		steps {
-    			input message: 'Run docker containers?', parameters: [booleanParam(defaultValue: false, description: '', name: 'Run docker')]
+    			script {
+    				env.RESULT = input message: 'Run docker containers?', parameters: [booleanParam(defaultValue: false, description: '', name: 'Run docker')]
+    			}
+    			echo "${env.RESULT}"
     		}
     	}
         stage ('maven step') {
