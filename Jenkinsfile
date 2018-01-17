@@ -26,8 +26,8 @@ pipeline {
     		// else u'll hold up the executor
     		agent none
 
-    		steps {
-	    		input {
+    		timeout (time: 5, unit: 'MINUTES') {
+    			input {
 					message "Should we continue?"
 					ok "Yes, we should."
 					submitter "admin,hhtay"
@@ -40,7 +40,10 @@ pipeline {
 						booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER')
 					}
 				}
+			}	
 
+    		steps {
+	    		
     			timeout (time: 5, unit: 'MINUTES') {
 
     				// and this is how u access the values
