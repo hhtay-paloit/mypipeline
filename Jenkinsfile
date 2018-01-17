@@ -28,6 +28,7 @@ pipeline {
 	    			//}
 
 	    			echo "${env.RESULT}"
+	    			echo "${params.RESULT}"
 	    		}
 	    	}
     	}
