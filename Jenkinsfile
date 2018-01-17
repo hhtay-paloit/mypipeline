@@ -35,15 +35,16 @@ pipeline {
 				// by new line
 				parameters {
 					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')
+					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'MAVEN')
+					booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER')
 				}
 			}
 
     		steps {
     			timeout (time: 5, unit: 'MINUTES') {
-    			
+
     				// and this is how u access the values
-	    			echo "${PERSON} ${RUN}"
+	    			echo "${PERSON} ${MAVEN} ${DOCKER}" 
 	    		}
 	    	}
     	}
@@ -57,7 +58,7 @@ pipeline {
             when {
             	beforeAgent true
             	expression {
-           			env.RESULT == 'Maven'
+           			${MAVEN} == 'Maven'
            		}
             }
             steps {
@@ -89,6 +90,9 @@ pipeline {
         	}
         	when {
         		expression {
+
+        			// this is how you access
+        			// params from the above
         			params.END_ACTION == 'greeting'
         		}
         	}
