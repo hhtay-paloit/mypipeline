@@ -1,7 +1,13 @@
 pipeline {
     agent none
     stages {
-        stage('maven step') {
+    	stage ('run docker') {
+    		agent none
+    		steps {
+    			input message: 'Run docker containers?', parameters: [booleanParam(defaultValue: false, description: '', name: 'Run docker')]
+    		}
+    	}
+        stage ('maven step') {
             agent {
                 docker { 
                 	image 'maven:3-alpine' 
@@ -12,7 +18,7 @@ pipeline {
                 sh 'mvn --version'
             }
         }
-        stage('node step') {
+        stage ('node step') {
             agent {
                 docker { image 'node:7-alpine' }
             }
@@ -20,7 +26,7 @@ pipeline {
                 sh 'node --version'
             }
         }
-        stage('slave step') {
+        stage ('slave step') {
         	agent {
         		label 'ubuntu'
         	}
