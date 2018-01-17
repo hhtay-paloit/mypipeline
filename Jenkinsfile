@@ -25,6 +25,9 @@ pipeline {
 	    			}
 
 	    			echo "${env.RESULT}"
+	    			echo "${env.RESULT['RUN']}"
+	    			echo "${env.RESULT[RUN]}"
+	    			echo "${env.RESULT.RUN}"
 	    		}
 	    	}
     	}
@@ -43,7 +46,7 @@ pipeline {
                 sh 'mvn --version'
             }
         }
-        stage ('node step') {
+        stage ('docker step') {
             agent {
                 docker { image 'node:7-alpine' }
             }
