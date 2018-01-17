@@ -21,14 +21,16 @@ pipeline {
     		steps {
     			timeout (time: 5, unit: 'MINUTES') {
 
-    				input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
+					input {
+						message "Should we continue?"
+						ok "Yes, we should."
+						submitter "admin,hhtay"
+						parameters {
+							string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+						}
+					}
 
-	    			//script {
-	    			//	env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
-	    			//}
-
-	    			echo "env.RESULT ${env.RESULT}"
-	    			echo "RUN ${RUN}"
+	    			echo "PERSON ${PERSON}"
 	    		}
 	    	}
     	}
