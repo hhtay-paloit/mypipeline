@@ -20,6 +20,9 @@ pipeline {
     		agent none
     		steps {
     			timeout (time: 5, unit: 'MINUTES') {
+
+    				input 'Do you want to proceed?'
+    				
 	    			script {
 	    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN'), booleanParam(defaultValue: false, description: 'Run docker container?', name: 'DOCKER'), string(defaultValue: 'master', description: '', name: 'RANDOM')], submitter: 'hhtay,admin'
 	    			}
