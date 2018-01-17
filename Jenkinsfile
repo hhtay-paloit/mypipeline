@@ -31,7 +31,7 @@ pipeline {
         stage ('dev step') {
         	agent none
         	when {
-        		branch 'dev'
+        		branch 'master'
         	}
         	steps {
         		input message: 'Are you going to choose?', ok: 'Okay', parameters: [choice(choices: ['dog', 'cat', 'turtle'], description: '', name: 'which animal?')], submitter: 'hhtay, freakerhh', submitterParameter: 'approver'
