@@ -26,29 +26,33 @@ pipeline {
     		// else u'll hold up the executor
     		agent none
 
-    		timeout (time: 5, unit: 'MINUTES') {
-    			input {
-					message "Should we continue?"
-					ok "Yes, we should."
-					submitter "admin,hhtay"
+    		// this is stage level input
+    		// this will block for input 
+			input {
+				message "Should we continue?"
+				ok "Yes, we should."
+				submitter "admin,hhtay"
 
-					// each parameter is separated
-					// by new line
-					parameters {
-						string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-						choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'MAVEN')
-						booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER')
-					}
+				// each parameter is separated
+				// by new line
+				parameters {
+					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'MAVEN')
+					booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER')
 				}
-			}	
+			}
 
     		steps {
-	    		
+
     			timeout (time: 5, unit: 'MINUTES') {
 
     				// and this is how u access the values
     				// but they are only available in this stage
 	    			echo "${PERSON} ${MAVEN} ${DOCKER}" 
+	    		}
+
+	    		script {
+	    			env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
 	    		}
 	    	}
     	}
@@ -62,10 +66,11 @@ pipeline {
             when {
             	beforeAgent true
             	expression {
-           			MAVEN == 'Maven'
-           		}
+            		env.RESULT == 'Maven'
+            	}
             }
             steps {
+
             	sh 'env'
                 sh 'mvn --version'
             }
