@@ -4,9 +4,7 @@ pipeline {
 	stages {
 		stage('Info') {
 			
-			agent {
-				docker 'openjdk:latest'
-			}
+			agent any
 			steps {
 				sh 'java -version'
 				sh 'pwd'
