@@ -63,7 +63,7 @@ pipeline {
         }
         stage ('dev step') {
         	agent {
-        		label 'ubuntu || master'
+        		label 'ubuntu'
         	}
         	when {
         		expression {
