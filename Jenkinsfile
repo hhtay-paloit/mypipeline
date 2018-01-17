@@ -2,10 +2,13 @@ pipeline {
     
     agent none
     
+    // pipeline must complete in 1 hour
     options {
         timeout(time: 1, unit: 'HOURS') 
     }
 
+    // can only appear once
+    // under the pipeline tag
     parameters {
 		choice(
 			// choices are a string of newline separated values
@@ -16,14 +19,20 @@ pipeline {
     }
 
     stages {
+
     	stage ('intro') {
 
+    		// if use input make sure agent is none
+    		// else u'll hold up the executor
     		agent none
 
     		input {
 				message "Should we continue?"
 				ok "Yes, we should."
 				submitter "admin,hhtay"
+
+				// each parameter is separated
+				// by new line
 				parameters {
 					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
 					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')
@@ -32,7 +41,9 @@ pipeline {
 
     		steps {
     			timeout (time: 5, unit: 'MINUTES') {
-	    			echo "PERSON ${PERSON} ${RUN}"
+    			
+    				// and this is how u access the values
+	    			echo "${PERSON} ${RUN}"
 	    		}
 	    	}
     	}
