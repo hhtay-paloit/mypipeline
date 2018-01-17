@@ -17,19 +17,20 @@ pipeline {
 
     stages {
     	stage ('intro') {
+
     		agent none
+
+    		input {
+				message "Should we continue?"
+				ok "Yes, we should."
+				submitter "admin,hhtay"
+				parameters {
+					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+				}
+			}
+
     		steps {
     			timeout (time: 5, unit: 'MINUTES') {
-
-					input {
-						message "Should we continue?"
-						ok "Yes, we should."
-						submitter "admin,hhtay"
-						parameters {
-							string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-						}
-					}
-
 	    			echo "PERSON ${PERSON}"
 	    		}
 	    	}
