@@ -74,9 +74,15 @@ pipeline {
 	    			env.RUN_MAVEN = input message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN')], submitter: 'hhtay,admin'
 
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
+
+	    			input message: 'Run Something?', parameters: {
+	    				booleanParam(defaultValue: false, description: 'Run docker container?', name: 'YAY1')
+	    				choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'YAY2')
+	    				}, submitter: 'hhtay,admin'
 	    		}
 
 	    		echo "Cheat code ${DOCKER_INPUT} ${env.CHEATING}"
+	    		echo "YAYS ${YAY1} ${YAY2}"
 	    	}
     	}
 
