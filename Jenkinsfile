@@ -25,7 +25,7 @@ pipeline {
 	    			}
 
 	    			echo "${env.RESULT}"
-	    			echo "${env.RESULT[RUN]}"
+	    			sh 'env'
 	    		}
 	    	}
     	}
@@ -38,9 +38,7 @@ pipeline {
             }
             when {
             	beforeAgent true
-            	expression {
-        			env.RESULT['RUN'] == 'Maven'
-        		}
+            	environment name: 'RESULT.RUN', value: 'true'
             }
             steps {
                 sh 'mvn --version'
