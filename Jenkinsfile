@@ -26,24 +26,25 @@ pipeline {
     		// else u'll hold up the executor
     		agent none
 
-    		input {
-				message "Should we continue?"
-				ok "Yes, we should."
-				submitter "admin,hhtay"
-
-				// each parameter is separated
-				// by new line
-				parameters {
-					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'MAVEN')
-					booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER')
-				}
-			}
-
     		steps {
+	    		input {
+					message "Should we continue?"
+					ok "Yes, we should."
+					submitter "admin,hhtay"
+
+					// each parameter is separated
+					// by new line
+					parameters {
+						string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+						choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'MAVEN')
+						booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER')
+					}
+				}
+
     			timeout (time: 5, unit: 'MINUTES') {
 
     				// and this is how u access the values
+    				// but they are only available in this stage
 	    			echo "${PERSON} ${MAVEN} ${DOCKER}" 
 	    		}
 	    	}
@@ -55,14 +56,13 @@ pipeline {
                 	args '-u root'
                 }
             }
-           // when {
-            //	beforeAgent true
-            //	expression {
-           	//		MAVEN == 'Maven'
-           	//	}
-           // }
+            when {
+            	beforeAgent true
+            	expression {
+           			MAVEN == 'Maven'
+           		}
+            }
             steps {
-            	echo "${PERSON} ${MAVEN} ${DOCKER}" 
             	sh 'env'
                 sh 'mvn --version'
             }
