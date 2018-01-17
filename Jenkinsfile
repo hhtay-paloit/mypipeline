@@ -1,3 +1,4 @@
+
 pipeline {
     
     agent none
@@ -16,6 +17,12 @@ pipeline {
 			choices: 'greeting\nsilence',
 			description: 'Say goodbye at the end',
 			name: 'END_ACTION')
+		choice(
+			// choices are a string of newline separated values
+			// https://issues.jenkins-ci.org/browse/JENKINS-41180
+			choices: 'greeting\nsilence',
+			description: 'Say hi at the beginning',
+			name: 'START_ACTION')
     }
 
     stages {
@@ -58,6 +65,7 @@ pipeline {
 	    		}
 	    	}
     	}
+
         stage ('maven step') {
             agent {
                 docker { 
@@ -77,6 +85,7 @@ pipeline {
                 sh 'mvn --version'
             }
         }
+
         stage ('docker step') {
             agent {
                 docker { image 'node:7-alpine' }
@@ -89,12 +98,14 @@ pipeline {
                 sh 'node --version'
             }
         }
+
         stage ('slave step') {
         	agent any
         	steps {
         		sh 'java -version '
         	}
         }
+
         stage ('dev step') {
         	agent {
         		label 'ubuntu'
