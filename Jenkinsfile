@@ -21,7 +21,7 @@ pipeline {
     		steps {
     			timeout (time: 5, unit: 'MINUTES') {
 
-    				input name:'MYCHOICE', message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
+    				input id:'MYCHOICE', message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
 
 	    			//script {
 	    			//	env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
