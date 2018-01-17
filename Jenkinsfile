@@ -24,10 +24,11 @@ pipeline {
     				input message 'Do you want to proceed?'
 
 	    			script {
-	    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN'), submitter: 'hhtay,admin'
+	    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
 	    			}
 
 	    			echo "${env.RESULT}"
+	    			echo "${env.RUN}"
 	    		}
 	    	}
     	}
@@ -41,7 +42,7 @@ pipeline {
             when {
             	beforeAgent true
             	expression {
-           			env.RUN == 'Maven'
+           			env.RESULT == 'Maven'
            		}
             }
             steps {
