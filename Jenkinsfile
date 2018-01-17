@@ -25,8 +25,6 @@ pipeline {
 	    			}
 
 	    			echo "${env.RESULT}"
-	    			echo "${env.RESULT['RUN']}"
-	    			echo "${env.RESULT.RUN}"
 	    		}
 	    	}
     	}
