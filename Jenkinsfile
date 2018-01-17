@@ -20,7 +20,9 @@ pipeline {
             }
             when {
             	beforeAgent true
-            	expression  { env.RESULT['Animal'] == 'Cat' }
+            	expression  { 
+            		environment name: 'RESULT['Animal'], value: 'Cat' 
+            	}
             }
             steps {
                 sh 'mvn --version'
