@@ -118,7 +118,7 @@ pipeline {
         	steps {
         		echo 'GOOD BYE!'
 
-        		echo "${param.START_ACTION} ${param.END_ACTION}"
+        		echo "${params.START_ACTION} ${params.END_ACTION}"
         	}
         }
     }
