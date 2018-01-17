@@ -4,7 +4,12 @@ pipeline {
 	stages {
 		stage('Info') {
 			
-			agent any
+			agent {
+				docker { 
+					image 'openjdk:latest' 
+					args '-v /var/jenkins_home:/var/jenkins_home'
+				}
+			}
 			steps {
 				sh 'java -version'
 				sh 'pwd'
