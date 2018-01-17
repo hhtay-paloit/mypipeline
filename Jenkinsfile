@@ -34,7 +34,7 @@ pipeline {
         		branch 'master'
         	}
         	steps {
-        		input message: 'Are you going to choose?', ok: 'Okay', parameters: [choice(choices: ['dog', 'cat', 'turtle'], description: '', name: 'which animal?')], submitter: 'hhtay, freakerhh', submitterParameter: 'approver'
+        		input message: 'Are you going to choose?', ok: 'Okay', parameters: [choice(choices: 'dog\ncat\nturtle', description: '', name: 'which animal?')], submitter: 'hhtay, freakerhh', submitterParameter: 'approver'
         	}
         }
     }
