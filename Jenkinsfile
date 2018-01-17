@@ -58,7 +58,7 @@ pipeline {
             when {
             	beforeAgent true
             	expression {
-           			${MAVEN} == 'Maven'
+           			MAVEN == 'Maven'
            		}
             }
             steps {
