@@ -37,7 +37,9 @@ pipeline {
             }
             when {
             	beforeAgent true
-            	environment name: 'RESULT[RUN]', value: 'Maven' 
+            	expression {
+        			env.RESULT['RUN'] == 'Maven'
+        		}
             }
             steps {
                 sh 'mvn --version'
