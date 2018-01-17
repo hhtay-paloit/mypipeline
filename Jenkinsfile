@@ -61,7 +61,7 @@ pipeline {
         		}
         	}
         	steps {
-        		input message: 'Are you going to choose?', ok: 'Okay', parameters: [choice(choices: 'dog\ncat\nturtle', description: '', name: 'which animal?')], submitter: 'hhtay\nfreakerhh\njenkins', submitterParameter: 'approver'
+        		echo 'GOOD BYE!'
         	}
         }
     }
