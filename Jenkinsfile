@@ -63,6 +63,9 @@ pipeline {
 
 	    		script {
 
+	    			// turn input into environment
+	    			// variables to be used in other 
+	    			// subsequent stages
 	    			env.CHEATING = DOCKER_INPUT
 
 	    			// you can set environment variables
@@ -103,7 +106,7 @@ pipeline {
             }
             when {
             	beforeAgent true
-            	environment name: 'RUN_DOCKER', value: 'true' 
+            	environment name: 'CHEATING', value: 'true' 
             }
             steps {
                 sh 'node --version'
