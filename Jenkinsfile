@@ -5,7 +5,7 @@ pipeline {
     		agent none
     		steps {
     			script {
-    				env.RESULT = input message: 'Run docker containers?', parameters: [booleanParam(defaultValue: false, description: '', name: 'Run docker')]
+    				env.RESULT = input message: 'Are you going to choose?', ok: 'Okay', parameters: [choice(choices: 'dog\ncat\nturtle', description: '', name: 'which animal?')], submitter: 'hhtay\nfreakerhh\njenkins', submitterParameter: 'approver'
     			}
     			echo "${env.RESULT}"
     		}
