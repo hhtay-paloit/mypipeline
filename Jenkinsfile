@@ -5,7 +5,7 @@ pipeline {
     		agent none
     		steps {
     			script {
-    				env.RESULT = input message: 'Are you going to choose?', ok: 'Okay', parameters: [choice(choices: 'dog\ncat\nturtle', description: '', name: 'which animal?')], submitter: 'someone important', submitterParameter: 'hhtay,jenkins'
+    				env.RESULT = input message: 'Are you going to choose?', ok: 'Okay', parameters: [choice(choices: 'dog\ncat\nturtle', description: '', name: 'which animal?')], submitter: 'hhtay,admin'
     			}
     			echo "${env.RESULT}"
     		}
