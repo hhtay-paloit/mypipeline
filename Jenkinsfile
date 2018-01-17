@@ -25,8 +25,8 @@ pipeline {
 				ok "Yes, we should."
 				submitter "admin,hhtay"
 				parameters {
-					[string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?'),
-					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')]
+					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')
 				}
 			}
 
