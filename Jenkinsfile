@@ -1,11 +1,17 @@
 pipeline {
+    
     agent none
+    
+    options {
+        timeout(time: 1, unit: 'HOURS') 
+    }
+
     parameters {
 		choice(
 			// choices are a string of newline separated values
 			// https://issues.jenkins-ci.org/browse/JENKINS-41180
 			choices: 'greeting\nsilence',
-			description: 'Say good at the end',
+			description: 'Say goodbye at the end',
 			name: 'END_ACTION')
     }
 
@@ -15,9 +21,9 @@ pipeline {
     		steps {
     			timeout (time: 15, unit: 'SECONDS') {
 	    			script {
-	    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: '', name: 'Animal'), booleanParam(defaultValue: false, description: '', name: 'Docker')], submitter: 'hhtay,admin'
-
+	    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN'), booleanParam(defaultValue: false, description: 'Run docker container?', name: 'DOCKER'), string(defaultValue: 'master', description: '', name: 'LABEL')], submitter: 'hhtay,admin'
 	    			}
+
 	    			echo "${env.RESULT}"
 	    		}
 	    	}
@@ -31,7 +37,7 @@ pipeline {
             }
             when {
             	beforeAgent true
-            	environment name: 'RESULT.Animal', value: 'Maven' 
+            	environment name: 'RESULT.RUN', value: 'Maven' 
             }
             steps {
                 sh 'mvn --version'
@@ -43,7 +49,7 @@ pipeline {
             }
             when {
             	beforeAgent true
-            	environment name: 'RESULT.Docker', value: 'true' 
+            	environment name: 'RESULT.DOCKER', value: 'true' 
             }
             steps {
                 sh 'node --version'
@@ -56,7 +62,9 @@ pipeline {
         	}
         }
         stage ('dev step') {
-        	agent none       
+        	agent {
+        		label ${env.RESULT.LABEL}
+        	}
         	when {
         		expression {
         			params.END_ACTION == 'greeting'
