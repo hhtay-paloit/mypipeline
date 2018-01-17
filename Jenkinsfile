@@ -63,7 +63,7 @@ pipeline {
 
 	    		script {
 
-	    			env.CHEATING = ${DOCKER_INPUT}
+	    			env.CHEATING = DOCKER_INPUT
 
 	    			// you can set environment variables
 	  				// using input during steps phase
