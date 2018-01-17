@@ -13,12 +13,14 @@ pipeline {
     	stage ('run docker') {
     		agent none
     		steps {
-    			script {
-    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: '', name: 'Animal'), booleanParam(defaultValue: false, description: '', name: 'Docker')], submitter: 'hhtay,admin'
+    			timeout (time: 15, unit: 'SECONDS') {
+	    			script {
+	    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: '', name: 'Animal'), booleanParam(defaultValue: false, description: '', name: 'Docker')], submitter: 'hhtay,admin'
 
-    			}
-    			echo "${env.RESULT}"
-    		}
+	    			}
+	    			echo "${env.RESULT}"
+	    		}
+	    	}
     	}
         stage ('maven step') {
             agent {
