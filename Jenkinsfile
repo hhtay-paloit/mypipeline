@@ -30,6 +30,10 @@ pipeline {
             agent {
                 docker { image 'node:7-alpine' }
             }
+            when {
+            	beforeAgent true
+            	environment name: 'RESULT.Docker', value: 'true' 
+            }
             steps {
                 sh 'node --version'
             }
