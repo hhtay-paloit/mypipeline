@@ -58,7 +58,7 @@ pipeline {
 
     				// and this is how u access the input values
     				// but they are only available in this stage
-	    			echo "${PERSON} ${MAVEN} ${DOCKER}" 
+	    			echo "${PERSON} ${MAVEN} ${DOCKER_INPUT}" 
 	    		}
 
 	    		script {
@@ -72,6 +72,8 @@ pipeline {
 
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
 	    		}
+
+	    		echo 'Cheat code ${DOCKER_INPUT} ${env.CHEATING}'
 	    	}
     	}
 
