@@ -52,7 +52,9 @@ pipeline {
 	    		}
 
 	    		script {
-	    			env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
+	    			env.RUN_MAVEN = input message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN')], submitter: 'hhtay,admin'
+
+	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
 	    		}
 	    	}
     	}
@@ -66,7 +68,7 @@ pipeline {
             when {
             	beforeAgent true
             	expression {
-            		env.RESULT == 'Maven'
+            		env.RUN_MAVEN == 'Maven'
             	}
             }
             steps {
@@ -81,7 +83,7 @@ pipeline {
             }
             when {
             	beforeAgent true
-            	environment name: 'RESULT.DOCKER', value: 'true' 
+            	environment name: 'RUN_DOCKER', value: 'true' 
             }
             steps {
                 sh 'node --version'
