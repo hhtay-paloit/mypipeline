@@ -3,17 +3,23 @@ pipeline {
     
     agent none
     
+    environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
+    }
+
     // pipeline must complete in 1 hour
     options {
-        timeout(time: 1, unit: 'HOURS') 
+        timeout(time: 30, unit: 'MINUTES') 
     }
 
     // can only appear once
     // under the pipeline tag
     parameters {
+
 		choice(
-			// choices are a string of newline separated values
-			// https://issues.jenkins-ci.org/browse/JENKINS-41180
+			// choices are a string of newline 
+			// separated values
 			choices: 'greeting\nsilence',
 			description: 'Say goodbye at the end',
 			name: 'END_ACTION')
@@ -42,7 +48,7 @@ pipeline {
 				parameters {
 					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
 					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'MAVEN')
-					booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER')
+					booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER_INPUT')
 				}
 			}
 
@@ -50,12 +56,18 @@ pipeline {
 
     			timeout (time: 5, unit: 'MINUTES') {
 
-    				// and this is how u access the values
+    				// and this is how u access the input values
     				// but they are only available in this stage
 	    			echo "${PERSON} ${MAVEN} ${DOCKER}" 
 	    		}
 
 	    		script {
+
+	    			env.CHEATING = ${DOCKER_INPUT}
+
+	    			// you can set environment variables
+	  				// using input during steps phase
+
 	    			env.RUN_MAVEN = input message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN')], submitter: 'hhtay,admin'
 
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
