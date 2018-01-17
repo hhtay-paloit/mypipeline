@@ -23,7 +23,7 @@ pipeline {
         stage('Test node') {
         	agent ubuntu
         	steps {
-        		sh 'java -version'
+        		sh 'java -version '
         	}
         }
     }
