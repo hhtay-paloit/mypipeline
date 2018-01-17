@@ -21,14 +21,13 @@ pipeline {
     		steps {
     			timeout (time: 5, unit: 'MINUTES') {
 
-    				input 'Do you want to proceed?'
+    				input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
 
 	    			script {
 	    				env.RESULT = input message: 'Choose the following options wisely', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN')], submitter: 'hhtay,admin'
 	    			}
 
 	    			echo "${env.RESULT}"
-	    			echo "${env.RUN}"
 	    		}
 	    	}
     	}
