@@ -79,7 +79,7 @@ pipeline {
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
 	    		}
 
-	    		echo "Cheat code ${DOCKER_INPUT} ${env.CHEATING}"
+	    		echo "Cheat code ${DOCKER_INPUT} ${env.CHEATING} ${env.RUN_MAVEN_RESULT}"
 	    	}
     	}
 
