@@ -74,13 +74,12 @@ pipeline {
 	  				// it will return a mapped variable which
 	  				// the values are not easily accessible
 
-	    			env.RUN_MAVEN = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'SCRIPT_RUN_MAVEN')], submitter: 'hhtay,admin')
+	    			env.RUN_MAVEN = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'NO_DIRECT_ACCESS_RUN_MAVEN')], submitter: 'hhtay,admin')
 
-	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'SCRIPT_RUN_DOCKER')], submitter: 'hhtay,admin'
+	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'NO_DIRECT_ACCESS_DOCKER')], submitter: 'hhtay,admin'
 	    		}
 
 	    		echo "STAGE_INPUT_DOCKER: ${STAGE_INPUT_DOCKER} == env.DOCKER ${env.DOCKER}"
-	    		echo "env.SCRIPT_RUN_MAVEN ${env.SCRIPT_RUN_MAVEN}"
 	    		echo "env.RUN_MAVEN ${env.RUN_MAVEN}, env.RUN_DOCKER ${env.RUN_DOCKER}"
 	    	}
     	}
@@ -95,11 +94,10 @@ pipeline {
             when {
             	beforeAgent true
             	expression {
-            		env.RUN_MAVEN.'RUN_MAVEN' == 'Maven'
+            		env.RUN_MAVEN == 'Maven'
             	}
             }
             steps {
-
             	sh 'env'
                 sh 'mvn --version'
             }
