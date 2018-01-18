@@ -74,7 +74,7 @@ pipeline {
 	  				// it will return a mapped variable which
 	  				// the values are not easily accessible
 
-	    			env.RUN_MAVEN = input message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN')], submitter: 'hhtay,admin'
+	    			env.RUN_MAVEN = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN')], submitter: 'hhtay,admin')
 
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
 	    		}
@@ -138,7 +138,7 @@ pipeline {
         	steps {
         		echo 'GOOD BYE!'
 
-        		echo "${params.START_ACTION} ${params.END_ACTION} ${env.CHEATING}"
+        		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION}, env.CHEATING ${env.CHEATING}"
         	}
         }
     }
