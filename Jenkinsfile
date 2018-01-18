@@ -68,21 +68,18 @@ pipeline {
 	    			// subsequent stages
 	    			env.CHEATING = DOCKER_INPUT
 
-	    			// you can set environment variables
+	    			// but you can also set environment variables
 	  				// using input during steps phase
+	  				// this is best used with 1 option, else 
+	  				// it will return a mapped variable which
+	  				// the values are not easily accessible
 
 	    			env.RUN_MAVEN = input message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN')], submitter: 'hhtay,admin'
 
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
-
-	    			input message: 'Run Something?', parameters: {
-	    				booleanParam(defaultValue: false, description: 'Run docker container?', name: 'YAY1')
-	    				choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'YAY2')
-	    				}, submitter: 'hhtay,admin'
 	    		}
 
 	    		echo "Cheat code ${DOCKER_INPUT} ${env.CHEATING}"
-	    		echo "YAYS ${YAY1} ${YAY2}"
 	    	}
     	}
 
@@ -141,7 +138,7 @@ pipeline {
         	steps {
         		echo 'GOOD BYE!'
 
-        		echo "${params.START_ACTION} ${params.END_ACTION}"
+        		echo "${params.START_ACTION} ${params.END_ACTION} ${env.CHEATING}"
         	}
         }
     }
