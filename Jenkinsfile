@@ -80,7 +80,7 @@ pipeline {
 	    		}
 
 	    		echo "STAGE_INPUT_DOCKER: ${STAGE_INPUT_DOCKER} == env.DOCKER ${env.DOCKER}"
-	    		echo "SCRIPT_RUN_DOCKER ${SCRIPT_RUN_DOCKER}, env.SCRIPT_RUN_MAVEN ${env.SCRIPT_RUN_MAVEN}"
+	    		echo "env.SCRIPT_RUN_MAVEN ${env.SCRIPT_RUN_MAVEN}"
 	    		echo "env.RUN_MAVEN ${env.RUN_MAVEN}, env.RUN_DOCKER ${env.RUN_DOCKER}"
 	    	}
     	}
