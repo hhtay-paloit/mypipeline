@@ -74,7 +74,7 @@ pipeline {
 	  				// it will return a mapped variable which
 	  				// the values are not easily accessible
 
-	    			env.RUN_MAVEN = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN')], submitter: 'hhtay,admin')
+	    			env.RUN_MAVEN_RESULT = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN'), booleanParam (defaultValue: false, description: 'Yes or no?', name: 'FAKE')], submitter: 'hhtay,admin')
 
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
 	    		}
@@ -93,7 +93,7 @@ pipeline {
             when {
             	beforeAgent true
             	expression {
-            		env.RUN_MAVEN == 'Maven'
+            		env.RUN_MAVEN_RESULT.'RUN_MAVEN' == 'Maven'
             	}
             }
             steps {
