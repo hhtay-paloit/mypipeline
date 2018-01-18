@@ -81,6 +81,7 @@ pipeline {
 	    		}
 
 	    		echo "STAGE_INPUT_DOCKER: ${STAGE_INPUT_DOCKER} == env.DOCKER ${env.DOCKER}"
+	    		echo "${MAVEN_RESULT}"
 	    		echo "env.RUN_MAVEN ${MAVEN_RESULT['NO_DIRECT_ACCESS_RUN_MAVEN']}, env.RUN_DOCKER ${env.RUN_DOCKER}"
 	    	}
     	}
