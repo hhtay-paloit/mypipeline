@@ -25,7 +25,7 @@ pipeline {
 			name: 'END_ACTION')
 
 		// say hi at the beginning
-		booleanParam (defaultValue: false, description: 'Say hi at the beginning?', name: 'START_ACTION')
+		booleanParam (defaultValue: false, description: 'Say hi at the beginning', name: 'START_ACTION')
     }
 
     stages {
@@ -47,8 +47,8 @@ pipeline {
 				// by new line
 				parameters {
 					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'MAVEN')
-					booleanParam (defaultValue: false, description: 'Run docker container?', name: 'DOCKER_INPUT')
+					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'STAGE_INPUT_MAVEN')
+					booleanParam (defaultValue: false, description: 'Run docker container?', name: 'STAGE_INPUT_DOCKER')
 				}
 			}
 
@@ -58,7 +58,7 @@ pipeline {
 
     				// and this is how u access the input values
     				// but they are only available in this stage
-	    			echo "${PERSON} ${MAVEN} ${DOCKER_INPUT}" 
+	    			echo "${PERSON} ${STAGE_INPUT_MAVEN} ${STAGE_INPUT_DOCKER}" 
 	    		}
 
 	    		script {
@@ -66,20 +66,22 @@ pipeline {
 	    			// turn stage-level input into 
 	    			// environment variables to be   
 	    			// used in other subsequent stages
-	    			env.CHEATING = DOCKER_INPUT
+	    			env.DOCKER = STAGE_INPUT_DOCKER
 
 	    			// but you can also set environment variables
 	  				// using input during steps phase
-	  				// this is best used with 1 option, else 
+	  				// this is best used with ONLY ONE option, else 
 	  				// it will return a mapped variable which
 	  				// the values are not easily accessible
 
-	    			env.RUN_MAVEN = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'RUN_MAVEN')], submitter: 'hhtay,admin')
+	    			env.RUN_MAVEN = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'SCRIPT_RUN_MAVEN')], submitter: 'hhtay,admin')
 
-	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
+	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'SCRIPT_RUN_DOCKER')], submitter: 'hhtay,admin'
 	    		}
 
-	    		echo "DOCKER_INPUT(stage): ${DOCKER_INPUT} == env.CHEATING ${env.CHEATING}, RUN_DOCKER ${RUN_DOCKER}, env.RUN_MAVEN ${env.RUN_MAVEN}"
+	    		echo "STAGE_INPUT_DOCKER: ${STAGE_INPUT_DOCKER} == env.DOCKER ${env.DOCKER}"
+	    		echo "SCRIPT_RUN_DOCKER ${SCRIPT_RUN_DOCKER}, env.SCRIPT_RUN_MAVEN ${env.SCRIPT_RUN_MAVEN}"
+	    		echo "env.RUN_MAVEN ${env.RUN_MAVEN}, env.RUN_DOCKER ${env.RUN_DOCKER}"
 	    	}
     	}
 
@@ -93,7 +95,7 @@ pipeline {
             when {
             	beforeAgent true
             	expression {
-            		env.RUN_MAVEN_RESULT.'RUN_MAVEN' == 'Maven'
+            		env.RUN_MAVEN.'RUN_MAVEN' == 'Maven'
             	}
             }
             steps {
@@ -109,7 +111,7 @@ pipeline {
             }
             when {
             	beforeAgent true
-            	environment name: 'CHEATING', value: 'true' 
+            	environment name: 'RUN_DOCKER', value: 'true' 
             }
             steps {
                 sh 'node --version'
@@ -138,7 +140,7 @@ pipeline {
         	steps {
         		echo 'GOOD BYE!'
 
-        		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION}, env.CHEATING ${env.CHEATING}"
+        		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION}"
         	}
         }
     }
