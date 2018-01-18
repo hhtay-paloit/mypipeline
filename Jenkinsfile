@@ -10,7 +10,7 @@ pipeline {
 
     // pipeline must complete in 1 hour
     options {
-        timeout(time: 30, unit: 'MINUTES') 
+        timeout(time: 10, unit: 'MINUTES') 
     }
 
     // can only appear once
@@ -68,8 +68,9 @@ pipeline {
 	    			// used in other subsequent stages
 	    			env.DOCKER = STAGE_INPUT_DOCKER
 
-	    			// but you can also set environment variables
-	  				// using input during steps phase
+	    			// this is rare, but you can also get input 
+	    			// and set them to environment variables
+	  				// in the steps phase
 	  				// this is best used with ONLY ONE option, else 
 	  				// it will return a mapped variable which
 	  				// the values are not easily accessible
@@ -137,7 +138,6 @@ pipeline {
         	}
         	steps {
         		echo 'GOOD BYE!'
-
         		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION}"
         	}
         }
