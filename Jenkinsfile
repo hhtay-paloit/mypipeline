@@ -31,7 +31,8 @@ pipeline {
     stages {
 		stage('SonarQube analysis') {
 			// requires SonarQube Scanner 2.8+
-			def scannerHome = tool 'SonarQube Scanner 2.8';
+			def scannerHome = tool 'scanner';
+			
 			withSonarQubeEnv('My SonarQube Server') {
 				echo '${scannerHome}'
 				sh "${scannerHome}/bin/sonar-scanner"
