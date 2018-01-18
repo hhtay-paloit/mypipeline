@@ -75,13 +75,13 @@ pipeline {
 	  				// it will return a mapped variable which
 	  				// the values are not easily accessible
 
-	    			env.RUN_MAVEN = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'NO_DIRECT_ACCESS_RUN_MAVEN')], submitter: 'hhtay,admin')
+	    			def MAVEN_RESULT = input (message: 'Run Maven?', parameters: [choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'NO_DIRECT_ACCESS_RUN_MAVEN'), booleanParam (defaultValue: false, description: 'Run docker container?', name: 'STAGE_INPUT_DOCKER')], submitter: 'hhtay,admin')
 
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'NO_DIRECT_ACCESS_DOCKER')], submitter: 'hhtay,admin'
 	    		}
 
 	    		echo "STAGE_INPUT_DOCKER: ${STAGE_INPUT_DOCKER} == env.DOCKER ${env.DOCKER}"
-	    		echo "env.RUN_MAVEN ${env.RUN_MAVEN}, env.RUN_DOCKER ${env.RUN_DOCKER}"
+	    		echo "env.RUN_MAVEN ${MAVEN_RESULT['NO_DIRECT_ACCESS_RUN_MAVEN']}, env.RUN_DOCKER ${env.RUN_DOCKER}"
 	    	}
     	}
 
