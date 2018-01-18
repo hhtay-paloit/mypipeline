@@ -63,9 +63,9 @@ pipeline {
 
 	    		script {
 
-	    			// turn input into environment
-	    			// variables to be used in other 
-	    			// subsequent stages
+	    			// turn stage-level input into 
+	    			// environment variables to be   
+	    			// used in other subsequent stages
 	    			env.CHEATING = DOCKER_INPUT
 
 	    			// but you can also set environment variables
@@ -79,7 +79,7 @@ pipeline {
 	    			env.RUN_DOCKER = input message: 'Run Docker?', parameters: [booleanParam(defaultValue: false, description: 'Run docker container?', name: 'RUN_DOCKER')], submitter: 'hhtay,admin'
 	    		}
 
-	    		echo "Cheat code ${DOCKER_INPUT} ${env.CHEATING} ${env.RUN_MAVEN_RESULT}"
+	    		echo "Cheat: ${DOCKER_INPUT}, env.CHEATING ${env.CHEATING}, env.RUN_MAVEN_RESULT ${env.RUN_MAVEN_RESULT.'RUN_MAVEN'}"
 	    	}
     	}
 
