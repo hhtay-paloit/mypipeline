@@ -155,7 +155,7 @@ pipeline {
         	}
         	steps {
         		echo 'GOOD BYE!'
-        		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION}"
+        		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION} updated"
         	}
         }
     }
