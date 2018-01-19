@@ -29,14 +29,8 @@ pipeline {
     }
 
     stages {
-		stage('SonarQube analysis') {
-			
-			agent any
-
-			steps {
-				sh 'env'
-			}
-		}
+    
+		
 
     	stage ('intro') {
 
