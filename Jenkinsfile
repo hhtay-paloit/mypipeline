@@ -6,6 +6,7 @@ pipeline {
     environment {
         DISABLE_AUTH = 'true'
         DB_ENGINE    = 'sqlite'
+        SCANNER_HOME = 'c:\tayhh\Software\sonar-scanner-3.0.3.778-windows\bin\'
     }
 
     // pipeline must complete in 1 hour
@@ -36,7 +37,7 @@ pipeline {
 			steps {
 
 				withSonarQubeEnv('sonarserver') {
-					bat "set"
+					bat "${SCANNER_HOME}\sonar-scanner"
 					// sh "sonar-scanner"
 				}	//
 			//	sh 'env'
@@ -136,7 +137,7 @@ pipeline {
         		bat 'java -version '
         	}
         }
-
+        /*
         stage ('slave step') {
         	agent {
         		label 'ubuntu'
@@ -152,6 +153,6 @@ pipeline {
         		echo 'GOOD BYE!'
         		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION}"
         	}
-        }
+        }*/
     }
 }
