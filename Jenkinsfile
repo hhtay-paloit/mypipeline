@@ -149,7 +149,7 @@ pipeline {
         			// params from the above
         			allOf {
         				params.END_ACTION == 'greeting';
-        				params.SLAVE_ON
+        				params.SLAVE_ON == true
         			}
         		}
         	}
