@@ -30,6 +30,7 @@ pipeline {
     }
 
     stages {
+    	/*
 		stage('SonarQube analysis') {
 			
 			agent any
@@ -43,7 +44,8 @@ pipeline {
 				sh 'env'
 			}
 		}
-
+		*/
+		
     	stage ('intro') {
 
     		// if use input make sure agent is none
