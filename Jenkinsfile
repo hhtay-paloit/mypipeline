@@ -29,21 +29,7 @@ pipeline {
     }
 
     stages {
-		stage('SonarQube analysis') {
-			
-			agent any
-
-			// requires SonarQube Scanner 2.8+
-			// def scannerHome = tool 'scanner';
-			steps {
-
-			//	withSonarQubeEnv('sonarserver') {
-					
-					// sh "sonar-scanner"
-			//	}	
-				sh 'env'
-			}
-		}
+		
     	stage ('intro') {
 
     		// if use input make sure agent is none
