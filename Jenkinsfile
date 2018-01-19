@@ -45,7 +45,7 @@ pipeline {
 			}
 		}
 		*/
-		
+
     	stage ('intro') {
 
     		// if use input make sure agent is none
@@ -139,7 +139,6 @@ pipeline {
         		sh 'java -version '
         	}
         }
-        /*
         stage ('slave step') {
         	agent {
         		label 'ubuntu'
@@ -158,6 +157,6 @@ pipeline {
         		echo 'GOOD BYE!'
         		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION}"
         	}
-        }*/
+        }
     }
 }
