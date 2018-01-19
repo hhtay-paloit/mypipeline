@@ -32,16 +32,15 @@ pipeline {
 		stage('SonarQube analysis') {
 			
 			agent none
-
-			steps {
-				// requires SonarQube Scanner 2.8+
-				def scannerHome = tool 'scanner';
-				
-				withSonarQubeEnv('My SonarQube Server') {
-					echo '${scannerHome}'
-					sh "${scannerHome}/bin/sonar-scanner"
-				}
+			
+			// requires SonarQube Scanner 2.8+
+			// def scannerHome = tool 'scanner';
+			
+			withSonarQubeEnv('sonarserver') {
+				echo '${scannerHome}'
+				sh "${scannerHome}/bin/sonar-scanner"
 			}
+			
 		}
     	stage ('intro') {
 
