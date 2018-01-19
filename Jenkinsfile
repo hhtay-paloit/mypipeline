@@ -35,10 +35,13 @@ pipeline {
 
 			// requires SonarQube Scanner 2.8+
 			// def scannerHome = tool 'scanner';
-			withSonarQubeEnv('sonarserver') {
-				echo '${scannerHome}'
-				sh "${scannerHome}/bin/sonar-scanner"
-			}	
+			steps {
+
+				withSonarQubeEnv('sonarserver') {
+					echo '${scannerHome}'
+					sh "${scannerHome}/bin/sonar-scanner"
+				}	
+			}
 		}
     	stage ('intro') {
 
