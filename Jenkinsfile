@@ -112,8 +112,8 @@ pipeline {
             	}
             }
             steps {
-            	sh 'set'
-                sh 'mvn --version'
+            	bat 'set'
+                bat 'mvn --version'
             }
         }
 
