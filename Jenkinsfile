@@ -38,8 +38,8 @@ pipeline {
 			steps {
 
 				withSonarQubeEnv('sonarserver') {
-					echo '${scannerHome}'
-					sh "${scannerHome}/bin/sonar-scanner"
+					
+					sh "sonar-scanner"
 				}	
 			}
 		}
