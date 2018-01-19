@@ -36,7 +36,7 @@ pipeline {
 			steps {
 
 				withSonarQubeEnv('sonarserver') {
-					
+					bat "set"
 					// sh "sonar-scanner"
 				}	//
 			//	sh 'env'
