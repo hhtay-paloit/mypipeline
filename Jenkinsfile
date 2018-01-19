@@ -29,8 +29,19 @@ pipeline {
     }
 
     stages {
-    
-		
+		stage('SonarQube analysis') {
+			
+			agent any
+
+			steps {
+
+				withSonarQubeEnv('sonarserver') {
+					
+					// sh "sonar-scanner"
+				}	//
+			//	sh 'env'
+			}
+		}
 
     	stage ('intro') {
 
