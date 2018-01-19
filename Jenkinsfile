@@ -26,7 +26,7 @@ pipeline {
 			name: 'END_ACTION')
 
 		// say hi at the beginning
-		booleanParam (defaultValue: false, description: 'Say hi at the beginning', name: 'START_ACTION')
+		booleanParam (defaultValue: false, description: 'Run on slave?', name: 'SLAVE_ON')
     }
 
     stages {
@@ -37,10 +37,9 @@ pipeline {
 			steps {
 
 				withSonarQubeEnv('sonarserver') {
+					bat "set"
 					bat "${SCANNER_HOME}/sonar-scanner"
-					// sh "sonar-scanner"
-				}	//
-			//	sh 'env'
+				}	
 			}
 		}
 
@@ -146,7 +145,10 @@ pipeline {
         		expression {
         			// this is how you access
         			// params from the above
-        			params.END_ACTION == 'greeting'
+        			allOf {
+        				params.END_ACTION == 'greeting';
+        				params.SLAVE_ON
+        			}
         		}
         	}
         	steps {
