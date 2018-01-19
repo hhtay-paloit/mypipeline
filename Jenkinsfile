@@ -144,13 +144,9 @@ pipeline {
         		label 'ubuntu'
         	}
         	when {
-        		expression {
-        			// this is how you access
-        			// params from the above
-        			allOf {
-        				params.END_ACTION == 'greeting';
+        		allOf {
+        				params.END_ACTION == 'greeting'
         				params.SLAVE_ON == true
-        			}
         		}
         	}
         	steps {
