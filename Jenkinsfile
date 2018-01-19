@@ -112,8 +112,8 @@ pipeline {
             	}
             }
             steps {
-            	bat 'set'
-                bat 'mvn --version'
+            	sh 'set'
+                sh 'mvn --version'
             }
         }
 
@@ -126,7 +126,7 @@ pipeline {
             	environment name: 'RUN_DOCKER', value: 'true' 
             }
             steps {
-                bat 'node --version'
+                sh 'node --version'
             }
         }
 
