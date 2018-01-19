@@ -37,8 +37,8 @@ pipeline {
 			steps {
 
 				withSonarQubeEnv('sonarserver') {
-					bat "set"
-					bat "${SCANNER_HOME}/sonar-scanner"
+					sh "env"
+					sh "${SCANNER_HOME}/sonar-scanner"
 				}	
 			}
 		}
@@ -112,8 +112,8 @@ pipeline {
             	}
             }
             steps {
-            	bat 'set'
-                bat 'mvn --version'
+            	sh 'set'
+                sh 'mvn --version'
             }
         }
 
@@ -133,7 +133,7 @@ pipeline {
         stage ('any step') {
         	agent any
         	steps {
-        		bat 'java -version '
+        		sh 'java -version '
         	}
         }
         /*
