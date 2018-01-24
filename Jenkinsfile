@@ -58,12 +58,7 @@ pipeline {
 			}
 		}
 		
-	    post {
-            always {
-                cleanWs()
-            }
-        }
-		
+	   
 		/*
 		stage('SonarQube analysis') {
 			
@@ -194,7 +189,17 @@ pipeline {
         	}
         }
         */
-       
-
+      
+    }
+    
+    post {
+        always {
+            cleanWs()
+        }
     }
 }
+
+
+
+
+
