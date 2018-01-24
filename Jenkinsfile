@@ -36,7 +36,18 @@ pipeline {
     	
     		steps {
     		    
-    		    sh 'ant dist'
+    		    sh 'ant test'
+    		    junit 'report/report.xml'
+    		}
+		}
+		
+		stage ('compile') {
+    	          
+    	 	agent any
+    	
+    		steps {
+    		    
+    		    sh 'ant build'
     		}
 		}
 		
