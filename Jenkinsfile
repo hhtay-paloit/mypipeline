@@ -54,32 +54,10 @@ pipeline {
     		post {
 				always {
 					archiveArtifacts artifacts: 'dist/lib/*.jar', fingerprint: true 
+					cleanWs()
 				}
 			}
 		}
-		/*
-		stage ('cleanup') {
-		          
-			agent any
-			steps {
-			    
-			    echo 'Cleaning up workspace'
-			}
-			post {
-			    always {
-			    	cleanWs()    
-			    }
-			}
-
-		}
-		*/
-		
-		post {
-	        always {
-	            echo 'One way or another, I have finished'
-	            deleteDir() /* clean up our workspace */
-	        }
-        }
 	   
 		/*
 		stage('SonarQube analysis') {
