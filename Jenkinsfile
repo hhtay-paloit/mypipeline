@@ -38,7 +38,7 @@ pipeline {
     		steps {
     			
     		    sh 'ant test'
-    		    junit 'report/report.xml'
+    		    junit 'report/TEST-result.xml'
     		}
 		}
 		
