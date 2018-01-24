@@ -36,7 +36,7 @@ pipeline {
     	 	agent any
     	
     		steps {
-    		    
+    			
     		    sh 'ant test'
     		    junit 'report/report.xml'
     		}
@@ -54,6 +54,7 @@ pipeline {
     		post {
 				always {
 					archiveArtifacts artifacts: 'dist/lib/*.jar', fingerprint: true 
+					cleanWs()
 				}
 			}
 		}
