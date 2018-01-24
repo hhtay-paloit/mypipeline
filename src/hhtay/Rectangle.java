@@ -19,4 +19,10 @@ public class Rectangle {
 	{
 		return width * height;
 	}
+	
+	public static void main(String args[])
+	{
+		Rectangle rect = new Rectangle();
+		System.out.print("Rectangle: " + rect.width + " x " + rect.height + " = " + rect.getVolume());
+	}
 }

@@ -28,7 +28,11 @@
 		<mkdir dir="${dist}/lib" />
 
 		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-		<jar jarfile="${dist}/lib/MyProject-${env.BUILD_NUMBER}-${DSTAMP}.jar" basedir="${build}" />
+		<jar jarfile="${dist}/lib/MyProject-${env.BUILD_NUMBER}-${DSTAMP}.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="hhtay.Rectangle" />
+			</manifest>
+		</jar>
 	</target>
 
 	<target name="clean" description="clean up">
