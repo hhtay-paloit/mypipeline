@@ -30,21 +30,20 @@ pipeline {
     }
 
     stages {
-    	/*
 		stage('SonarQube analysis') {
 			
 			agent any
 
 			steps {
-
+			
 				withSonarQubeEnv('sonarserver') {
-					sh "${SCANNER_HOME}/sonar-scanner.bat"
+					def SCANNER_HOME = tool 'sonarscanner'	
+					sh "${SCANNER_HOME}/sonar-scanner"
 				}	
-
+				
 				sh 'env'
 			}
 		}
-		*/
 
     	stage ('intro') {
 
