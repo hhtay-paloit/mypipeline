@@ -57,7 +57,7 @@ pipeline {
 				}
 			}
 		}
-		
+		/*
 		stage ('cleanup') {
 		          
 			agent any
@@ -72,8 +72,14 @@ pipeline {
 			}
 
 		}
-
+		*/
 		
+		post {
+	        always {
+	            echo 'One way or another, I have finished'
+	            deleteDir() /* clean up our workspace */
+	        }
+        }
 	   
 		/*
 		stage('SonarQube analysis') {
