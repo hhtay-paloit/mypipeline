@@ -144,9 +144,8 @@ pipeline {
         		label 'ubuntu'
         	}
         	when {
-        		allOf {
+        		expression {
         				params.END_ACTION == 'greeting'
-        				params.SLAVE_ON == true
         		}
         	}
         	steps {
