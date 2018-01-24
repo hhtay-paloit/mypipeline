@@ -189,7 +189,17 @@ pipeline {
         	}
         }
         */
-      
+        
+        stage ('cleanup') {
+                  
+        	agent any
+        	
+        	post {
+        		always {
+        		    clearWs()
+        		}
+        	}
+      	}
     }
 }
 
