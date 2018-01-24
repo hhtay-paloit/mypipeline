@@ -58,6 +58,22 @@ pipeline {
 			}
 		}
 		
+		stage ('cleanup') {
+		          
+			agent any
+			steps {
+			    
+			    echo 'Cleaning up workspace'
+			}
+			post {
+			    always {
+			    	cleanWs()    
+			    }
+			}
+
+		}
+
+		
 	   
 		/*
 		stage('SonarQube analysis') {
