@@ -145,7 +145,8 @@ pipeline {
         	}
         	when {
         		expression {
-        				params.END_ACTION == 'greeting'
+        				params.END_ACTION == 'greeting' && 
+        				params.SLAVE_ON == true
         		}
         	}
         	steps {
