@@ -102,6 +102,17 @@ pipeline {
 	    		echo "env.RUN_MAVEN ${env.RUN_MAVEN}, env.RUN_DOCKER ${env.RUN_DOCKER}"
 	    	}
     	}
+    	
+    	stage ('compile') {
+    	          
+    	 	agent any
+    	
+    		steps {
+    		    
+    		    sh 'ant dist'
+    		}
+		}
+
 
         stage ('maven step') {
             agent {
