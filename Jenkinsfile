@@ -53,7 +53,7 @@ pipeline {
     		
     		post {
 				always {
-					// archiveArtifacts artifacts: 'dist/lib/*.jar', fingerprint: true 
+					archiveArtifacts artifacts: 'dist/lib/*.jar' //, fingerprint: true 
 					cleanWs()
 				}
 			}
