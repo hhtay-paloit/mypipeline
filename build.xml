@@ -11,6 +11,11 @@
 	<property name="build" location="build" />
 	<property name="dist" location="dist" />
 
+	<path id="classpath">
+		<pathelement location="./lib/junit-4.12.jar" />
+		<pathelement location="./lib/hamcrest-core-1.3.jar" />
+	</path>
+
 	<target name="init">
 		<!-- Create the time stamp -->
 		<tstamp />
@@ -20,9 +25,20 @@
 
 	<target name="compile" depends="init" description="compile the source">
 		<!-- Compile the java code from ${src} into ${build} -->
-		<javac includeantruntime="false" srcdir="${src}" destdir="${build}" />
+		<javac includeantruntime="false" srcdir="${src}" destdir="${build}">
+			<classpath refid="classpath" />	
+		</javac>
 	</target>
 
+	<target name="test" depends="compile">
+		<junit printsummary="true" fork="true">
+			<classpath refid="classpath" />
+			<test name="hhtay.test.RectangleTests" todir="./report" outfile="report">
+				<formatter type="xml"/>
+			</test>
+		</junit>
+	</target>
+	
 	<target name="dist" depends="compile" description="generate the distribution">
 		<!-- Create the distribution directory -->
 		<mkdir dir="${dist}/lib" />
