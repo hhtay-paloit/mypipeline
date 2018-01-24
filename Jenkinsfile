@@ -31,17 +31,7 @@ pipeline {
     }
 
     stages {
-    	stage ('compile') {
-    	          
-    	 	agent any
     	
-    		steps {
-    			
-    		    sh 'ant test'
-    		    junit 'report/TEST-.result.xml'
-    		}
-		}
-		
 		stage ('build') {
     	          
     	 	agent any
@@ -56,6 +46,17 @@ pipeline {
 					archiveArtifacts artifacts: 'dist/lib/*.jar', fingerprint: true 
 				}
 			}
+		}
+		
+		stage ('test') {
+    	          
+    	 	agent any
+    	
+    		steps {
+    			
+    		    sh 'ant test'
+    		    junit 'report/TEST-.result.xml'
+    		}
 		}
 	   
 		
