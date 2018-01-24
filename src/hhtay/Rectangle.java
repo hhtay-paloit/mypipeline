@@ -22,7 +22,7 @@ public class Rectangle {
 	
 	public static void main(String args[])
 	{
-		Rectangle rect = new Rectangle();
+		Rectangle rect = new Rectangle(5, 4);
 		System.out.print("Rectangle: " + rect.width + " x " + rect.height + " = " + rect.getVolume());
 	}
 }
