@@ -65,8 +65,8 @@ pipeline {
 				// by new line
 				parameters {
 					string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: 'Choose Maven to run it!', name: 'STAGE_INPUT_MAVEN')
-					booleanParam (defaultValue: false, description: 'Run docker container?', name: 'STAGE_INPUT_DOCKER')
+					choice(choices: 'Dog\nCat\nTurtle\nMaven', description: "Doesn't matter", name: 'STAGE_INPUT_MAVEN')
+					booleanParam (defaultValue: false, description: "Doesn't matter too", name: 'STAGE_INPUT_DOCKER')
 				}
 			}
 
@@ -141,6 +141,7 @@ pipeline {
         		sh 'java -version '
         	}
         }
+        
         stage ('slave step') {
         	agent {
         		label 'ubuntu'
@@ -153,7 +154,7 @@ pipeline {
         	}
         	steps {
         		echo 'GOOD BYE!'
-        		echo "params.START_ACTION: ${params.START_ACTION}, params.END_ACTION: ${params.END_ACTION} updated"
+        		echo "params.SLAVE_ON: ${params.SLAVE_ON}, params.END_ACTION: ${params.END_ACTION} updated"
         	}
         }
     }
