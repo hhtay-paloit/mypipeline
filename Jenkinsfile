@@ -40,6 +40,7 @@ pipeline {
     		}
 		}
 		
+		/*
 		stage('SonarQube analysis') {
 			
 			agent any
@@ -168,5 +169,6 @@ pipeline {
         		echo "params.SLAVE_ON: ${params.SLAVE_ON}, params.END_ACTION: ${params.END_ACTION} updated"
         	}
         }
+        */
     }
 }
