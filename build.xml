@@ -9,11 +9,13 @@
 	
 	<property name="src" location="src" />
 	<property name="build" location="build" />
+	<property name="report" location="report" />
 	<property name="dist" location="dist" />
 
 	<path id="classpath">
 		<pathelement location="./lib/junit-4.12.jar" />
 		<pathelement location="./lib/hamcrest-core-1.3.jar" />
+		<pathelement location="${build}" />
 	</path>
 
 	<target name="init">
@@ -21,6 +23,7 @@
 		<tstamp />
 		<!-- Create the build directory structure used by compile -->
 		<mkdir dir="${build}" />
+		<mkdir dir="${report}"/>
 	</target>
 
 	<target name="compile" depends="init" description="compile the source">
@@ -55,6 +58,7 @@
 		<!-- Delete the ${build} and ${dist} directory trees -->
 		<delete dir="${build}" />
 		<delete dir="${dist}" />
+		<delete dir="${report}" />
 	</target>
 	
 </project>
