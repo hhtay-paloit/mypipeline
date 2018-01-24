@@ -35,9 +35,12 @@ pipeline {
 			agent any
 
 			steps {
-			
-				withSonarQubeEnv('sonarserver') {
+				script {
 					def SCANNER_HOME = tool 'sonarscanner';	
+				}
+				
+				withSonarQubeEnv('sonarserver') {
+					
 					sh "${SCANNER_HOME}/sonar-scanner"
 				}	
 				
