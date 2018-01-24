@@ -47,7 +47,7 @@ pipeline {
     	
     		steps {
     		    
-    		    sh 'ant build'
+    		    sh 'ant dist'
     		}
 		}
 		
