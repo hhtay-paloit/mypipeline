@@ -18,7 +18,7 @@
 		<pathelement location="${build}" />
 	</path>
 
-	<target name="init">
+	<target name="init" depends="clean">
 		<!-- Create the time stamp -->
 		<tstamp />
 		<!-- Create the build directory structure used by compile -->
