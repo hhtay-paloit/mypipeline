@@ -31,6 +31,9 @@
 		<javac includeantruntime="false" srcdir="${src}" destdir="${build}">
 			<classpath refid="classpath" />	
 		</javac>
+		<javac includeantruntime="false" srcdir="tests" destdir="${build}">
+			<classpath refid="classpath" />	
+		</javac>
 	</target>
 
 	<target name="test" depends="compile">
