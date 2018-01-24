@@ -41,7 +41,7 @@ pipeline {
     		}
 		}
 		
-		stage ('compile') {
+		stage ('build') {
     	          
     	 	agent any
     	
@@ -70,7 +70,7 @@ pipeline {
 			}
 		}
 
-    	stage ('intro') {
+    	stage ('param') {
 
     		// if use input make sure agent is none
     		// else u'll hold up the executor
@@ -126,7 +126,7 @@ pipeline {
     	}
     	
 
-        stage ('maven step') {
+        stage ('maven test') {
             agent {
                 docker { 
                 	image 'maven:3-alpine' 
@@ -145,7 +145,7 @@ pipeline {
             }
         }
 
-        stage ('docker step') {
+        stage ('docker test') {
             agent {
                 docker { image 'node:7-alpine' }
             }
@@ -158,14 +158,14 @@ pipeline {
             }
         }
 
-        stage ('any step') {
+        stage ('version check') {
         	agent any
         	steps {
         		sh 'java -version '
         	}
         }
         
-        stage ('slave step') {
+        stage ('bye') {
         	agent {
         		label 'ubuntu'
         	}
