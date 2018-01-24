@@ -49,6 +49,12 @@ pipeline {
     		    
     		    sh 'ant dist'
     		}
+    		
+    		post {
+				always {
+					archiveArtifacts artifacts: 'dist/lib/*.jar', fingerprint: true 
+				}
+			}
 		}
 		
 		/*
