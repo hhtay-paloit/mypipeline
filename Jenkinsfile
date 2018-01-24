@@ -12,7 +12,7 @@ pipeline {
     // pipeline must complete in 1 hour
     options {
         timeout(time: 10, unit: 'MINUTES') 
-        buildDiscarder(logRotator(numToKeep: 2, artifactNumToKeep: 2))
+        buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2'))
     }
 
     // can only appear once
