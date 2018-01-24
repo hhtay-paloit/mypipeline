@@ -30,6 +30,16 @@ pipeline {
     }
 
     stages {
+    	stage ('compile') {
+    	          
+    	 	agent any
+    	
+    		steps {
+    		    
+    		    sh 'ant dist'
+    		}
+		}
+		
 		stage('SonarQube analysis') {
 			
 			agent any
@@ -103,16 +113,6 @@ pipeline {
 	    	}
     	}
     	
-    	stage ('compile') {
-    	          
-    	 	agent any
-    	
-    		steps {
-    		    
-    		    sh 'ant dist'
-    		}
-		}
-
 
         stage ('maven step') {
             agent {
