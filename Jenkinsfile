@@ -53,7 +53,7 @@ pipeline {
     		
     		post {
 				always {
-					archiveArtifacts artifacts: 'dist/lib/*.jar' //, fingerprint: true 
+					archiveArtifacts artifacts: 'dist/lib/*.jar', fingerprint: true 
 				}
 			}
 		}
@@ -189,15 +189,6 @@ pipeline {
         	}
         }
         */
-        
-        stage ('cleanup') {
-                  
-        	agent any
-        	
-        	steps {
-       			clearWs()        	
-        	}
-      	}
     }
 }
 
