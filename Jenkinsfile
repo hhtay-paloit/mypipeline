@@ -194,10 +194,8 @@ pipeline {
                   
         	agent any
         	
-        	post {
-        		always {
-        		    clearWs()
-        		}
+        	steps {
+       			clearWs()        	
         	}
       	}
     }
