@@ -54,7 +54,6 @@ pipeline {
     		post {
 				always {
 					archiveArtifacts artifacts: 'dist/lib/*.jar' //, fingerprint: true 
-					cleanWs()
 				}
 			}
 		}
@@ -189,5 +188,11 @@ pipeline {
         	}
         }
         */
+        post {
+            always {
+                cleanWs()
+            }
+        }
+
     }
 }
